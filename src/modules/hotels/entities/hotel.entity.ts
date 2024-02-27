@@ -8,10 +8,10 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { HotelType } from './hotel.type.enum';
-import { Room } from '../rooms/room.entity';
-import { Convenience } from '../conveniences/convenience.entity';
-import { City } from '../cities/entities/city.entity';
+import { HotelType } from '../enums/hotel.type.enum';
+import { Room } from '../../rooms/room.entity';
+import { Convenience } from '../../conveniences/convenience.entity';
+import { City } from '../../cities/entities/city.entity';
 
 @Entity('hotels')
 export class Hotel extends BaseEntity {

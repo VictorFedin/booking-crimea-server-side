@@ -16,13 +16,6 @@ async function bootstrap() {
     forceCloseConnections: true,
   });
 
-  app.enableShutdownHooks();
-
-  app.enableVersioning({
-    type: VersioningType.URI,
-    defaultVersion: VERSION_NEUTRAL,
-  });
-
   const config = app.get(ConfigService);
 
   const corsOptions = {
@@ -33,22 +26,31 @@ async function bootstrap() {
     credentials: true,
   };
 
+  app.enableShutdownHooks();
+  app.enableVersioning({
+    type: VersioningType.URI,
+    defaultVersion: VERSION_NEUTRAL,
+  });
   app.enableCors(corsOptions);
-
   app.useGlobalPipes(
     new ValidationPipe({
       forbidUnknownValues: false,
     }),
   );
 
+  // OpenAPI Documentation Setup 📖
   const swaggerOptions = new DocumentBuilder()
-    .setTitle(config.get<string>('SWAGGER_TITLE'))
-    .setDescription(config.get<string>('SWAGGER_DESCRIPTION'))
-    .setVersion(config.get<string>('SWAGGER_VERSION'))
+    .setTitle('API сервиса «Booking Crimea»')
+    .setDescription(
+      'API документация для сервиса онлайн-бронирования отелей «Booking Crimea»',
+    )
+    .setVersion('1.0')
+    .addTag('Администрирование', 'Операции администрирования')
+    .setContact('Виктор', 'https://t.me/Tyman3413', 'tyman3413@gmail.com')
     .build();
 
   const document = SwaggerModule.createDocument(app, swaggerOptions);
-  SwaggerModule.setup(config.get<string>('SWAGGER_DIRECTORY'), app, document);
+  SwaggerModule.setup('api', app, document);
 
   await app.listen(config.get<number>('SERVER_PORT'));
 }

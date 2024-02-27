@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { City } from '../entities/city.entity';
 import { Repository } from 'typeorm';
+import { CitiesResult } from '../dto/cities.result';
 
 @Injectable()
 export class CitiesService {
@@ -10,7 +11,7 @@ export class CitiesService {
     private readonly repository: Repository<City>,
   ) {}
 
-  async findAll(page: number, limit: number): Promise<any> {
+  async findAll(page: number, limit: number): Promise<CitiesResult[]> {
     const skip = limit * (page - 1);
 
     const cities = await this.repository.find({

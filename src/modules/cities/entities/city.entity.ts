@@ -10,7 +10,7 @@ import {
 import { State } from '../../states/state.entity';
 import { User } from '../../users/user.entity';
 import { Landlord } from '../../landlords/entities/landlord.entity';
-import { Hotel } from '../../hotels/hotel.entity';
+import { Hotel } from '../../hotels/entities/hotel.entity';
 
 @Entity('cities')
 export class City extends BaseEntity {

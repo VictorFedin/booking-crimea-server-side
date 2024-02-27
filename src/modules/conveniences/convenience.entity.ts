@@ -5,7 +5,7 @@ import {
   ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Hotel } from '../hotels/hotel.entity';
+import { Hotel } from '../hotels/entities/hotel.entity';
 
 @Entity('conveniences')
 export class Convenience extends BaseEntity {

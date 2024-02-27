@@ -6,7 +6,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Hotel } from '../hotels/hotel.entity';
+import { Hotel } from '../hotels/entities/hotel.entity';
 
 @Entity('rooms')
 export class Room extends BaseEntity {
