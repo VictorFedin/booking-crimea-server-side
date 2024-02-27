@@ -4,12 +4,14 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { HotelType } from './hotel.type.enum';
 import { Room } from '../rooms/room.entity';
 import { Convenience } from '../conveniences/convenience.entity';
+import { City } from '../cities/entities/city.entity';
 
 @Entity('hotels')
 export class Hotel extends BaseEntity {
@@ -42,6 +44,13 @@ export class Hotel extends BaseEntity {
 
   @Column({ type: 'enum', enum: HotelType, nullable: true })
   type: HotelType;
+
+  @Column({ nullable: true })
+  cityId: number;
+
+  @ManyToOne(() => City, (city) => city.hotels)
+  @JoinTable()
+  city: City;
 
   @OneToMany(() => Room, (room) => room.hotel)
   rooms: Room[];

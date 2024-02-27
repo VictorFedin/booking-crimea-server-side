@@ -10,15 +10,20 @@ export class CitiesService {
     private readonly repository: Repository<City>,
   ) {}
 
-  async findAll(page: number, limit: number): Promise<City[]> {
+  async findAll(page: number, limit: number): Promise<any> {
     const skip = limit * (page - 1);
 
-    return await this.repository
-      .createQueryBuilder('city')
-      .innerJoinAndSelect('city.state', 'state')
-      .where('state.name = :name', { name: 'Autonomous Republic of Crimea' })
-      .skip(skip)
-      .take(limit)
-      .getMany();
+    const cities = await this.repository.find({
+      relations: ['hotels'],
+      order: { population: 'DESC' },
+      skip: skip,
+      take: limit,
+    });
+
+    return cities.map((city) => ({
+      city: city.name,
+      photo: city.photo,
+      hotelsCount: city.hotels.length,
+    }));
   }
 }

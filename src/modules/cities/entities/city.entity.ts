@@ -7,10 +7,10 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Timezone } from '../dto/timezone.dto';
 import { State } from '../../states/state.entity';
 import { User } from '../../users/user.entity';
 import { Landlord } from '../../landlords/entities/landlord.entity';
+import { Hotel } from '../../hotels/hotel.entity';
 
 @Entity('cities')
 export class City extends BaseEntity {
@@ -27,6 +27,9 @@ export class City extends BaseEntity {
   longitude: string;
 
   @Column({ nullable: true })
+  population: number;
+
+  @Column({ nullable: true })
   photo: string;
 
   @Column({ nullable: true })
@@ -41,4 +44,7 @@ export class City extends BaseEntity {
 
   @OneToMany(() => Landlord, (landlord) => landlord.city)
   landlords: Landlord[];
+
+  @OneToMany(() => Hotel, (hotel) => hotel.city)
+  hotels: Hotel[];
 }
