@@ -23,7 +23,7 @@ export class CitiesService {
     return cities.map((city) => ({
       city: city.name,
       photo: city.photo,
-      hotelsCount: city.hotels.length,
+      totalHotels: city.hotels.length,
     }));
   }
 }

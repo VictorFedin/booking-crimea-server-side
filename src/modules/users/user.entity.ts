@@ -42,7 +42,7 @@ export class User extends BaseEntity {
   @Column({ type: 'enum', enum: UserGender, nullable: true })
   gender: UserGender;
 
-  @Column({ length: 100, unique: true })
+  @Column({ length: 100, unique: true, nullable: true })
   phone: string;
 
   @Column({ nullable: true })
@@ -81,7 +81,7 @@ export class User extends BaseEntity {
   @Column({ type: 'jsonb', nullable: true })
   avatar: FileDetails;
 
-  @Column({ length: 4, nullable: true, default: 'ru-RU' })
+  @Column({ length: 10, nullable: true, default: 'ru-RU' })
   locale: string;
 
   @Column({ length: 3, nullable: true, default: 'RUB' })
@@ -90,7 +90,7 @@ export class User extends BaseEntity {
   @Column({ length: 2, nullable: true, default: 'ru' })
   preferredLanguage: string;
 
-  @Column()
+  @Column({ nullable: true })
   landlordId: number;
 
   @OneToOne(() => Landlord)

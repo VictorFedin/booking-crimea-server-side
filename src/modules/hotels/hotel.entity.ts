@@ -24,6 +24,9 @@ export class Hotel extends BaseEntity {
   @Column({ length: 500, nullable: true })
   description: string;
 
+  @Column({ nullable: true })
+  address: string;
+
   @Column({
     type: 'float',
     name: 'cheapest_price',
@@ -36,10 +39,10 @@ export class Hotel extends BaseEntity {
   @JoinTable()
   conveniences: Convenience[];
 
-  @Column()
+  @Column({ nullable: true })
   placementTerms: string; // TODO new table
 
-  @Column()
+  @Column({ nullable: true })
   reviews: string; // TODO new table
 
   @Column({ type: 'enum', enum: HotelType, nullable: true })
