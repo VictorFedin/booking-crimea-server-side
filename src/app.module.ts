@@ -19,11 +19,10 @@ import { LandlordsModule } from './modules/landlords/landlords.module';
     TypeOrmModule.forRootAsync({
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
-        host: configService.get<string>('DATABASE_HOST'),
-        port: configService.get<number>('DATABASE_PORT'),
-        username: configService.get<string>('DATABASE_USERNAME'),
-        password: configService.get<string>('DATABASE_PASSWORD'),
-        database: configService.get<string>('DATABASE_NAME'),
+        host: configService.get<string>('POSTGRES_HOST'),
+        username: configService.get<string>('POSTGRES_USER'),
+        password: configService.get<string>('POSTGRES_PASSWORD'),
+        database: configService.get<string>('POSTGRES_DATABASE'),
         logging: configService.get<string>('DATABASE_LOGGING') === 'true',
         synchronize:
           configService.get<string>('DATABASE_SYNCHRONIZE') === 'true',
