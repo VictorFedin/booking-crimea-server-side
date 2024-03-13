@@ -12,5 +12,8 @@
       "dest": "src/main.js",
       "methods": ["GET", "PUT", "POST", "DELETE"]
     }
+  ],
+  "rewrites": [
+    {"source": "/(.*)", "destination": "/"}
   ]
 }
