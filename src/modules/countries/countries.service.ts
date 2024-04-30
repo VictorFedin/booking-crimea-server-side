@@ -11,6 +11,9 @@ export class CountriesService {
   ) {}
 
   async create(country: Country) {
-    return await this.repository.save(country);
+    const existingCountry = await this.repository.findOne({
+      where: { englishName: country.englishName },
+    });
+    if (!existingCountry) return await this.repository.save(country);
   }
 }

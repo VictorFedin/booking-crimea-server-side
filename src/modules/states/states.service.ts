@@ -11,6 +11,9 @@ export class StatesService {
   ) {}
 
   async create(state: State) {
-    return await this.repository.save(state);
+    const existingState = await this.repository.findOne({
+      where: { englishName: state.englishName },
+    });
+    if (!existingState) return await this.repository.save(state);
   }
 }

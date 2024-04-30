@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CitiesResult } from './cities.result';
 import { City } from './city.entity';
+import { CitiesResult } from './dto/cities.result';
 
 @Injectable()
 export class CitiesService {
@@ -12,7 +12,10 @@ export class CitiesService {
   ) {}
 
   async create(city: City) {
-    return await this.repository.save(city);
+    const existingCity = await this.repository.findOne({
+      where: { englishName: city.englishName },
+    });
+    if (!existingCity) return await this.repository.save(city);
   }
 
   async findAll(page: number, limit: number): Promise<CitiesResult[]> {
